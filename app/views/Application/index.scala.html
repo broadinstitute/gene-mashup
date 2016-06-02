@@ -1,10 +1,59 @@
 @()
 <html>
-    <head>
-        <title>GeneMashup</title>
-    </head>
-    <body>
-        <h1>GeneMashup Start Page</h1>
-        <p>This is the start page for GeneMashup.</p>
-    </body>
+  <head>
+    <meta charset="UTF-8">
+    <title>Gene Mashup</title>
+  <meta name="author" content="Broad Institute">
+  <meta name="description" content="MPG Hackathon June 2016">
+  <meta name="keywords" content="keywords,here">
+  <link rel="stylesheet" href="home.css" type="text/css">
+  </head>
+  <body>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/lodash/4.13.1/lodash.min.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
+  <script src="mustache.min.js" type="text/javascript"></script>
+  <script src="home.js" type="text/javascript"></script>
+
+  <script>
+  $(document).ready(function() {
+    generatePage();
+  });
+
+  </script>
+
+  <script id="dataItemTemplate" type="x-tmpl-mustache">
+    <li>
+      {{ dataSourceName }}: {{ data }}
+    </li>
+  </script>
+
+  <script id="selectorsTemplate" type="x-tmpl-mustache">
+    <div>
+      {{ #checkboxItems }}
+        <p><input type="checkbox" data-name="{{ name }}" {{ checked }} />{{ name }}</p>
+      {{ /checkboxItems }}
+    </div>
+    <button onclick=reloadSection("{{ section }}")>refresh</button>
+  </script>
+
+  <h1>Gene Mashup</h1>
+
+  <p>Gene: <input id="geneInput"><button onclick="selectGene">search</button></p>
+
+  <h2>Gene info</h2>
+  <div id="geneInfo" class="infoSection" ><ul></ul></div>
+  <div id="geneInfoSelectors" class="selectorSection"></div>
+
+  <h2>Human genetic detail</h2>
+  <div id="humanInfo" class="infoSection"><ul></ul></div>
+  <div id="humanInfoSelectors" class="selectorSection"></div>
+
+  <h2>Model organisms</h2>
+  <div id="modelOrganismsInfo" class="infoSection"><ul></ul></div>
+  <div id="modelOrganismsInfoSelectors" class="selectorSection"></div>
+
+  </body>
 </html>
