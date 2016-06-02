@@ -1,6 +1,7 @@
 package controllers.socket
 
 import controllers.socket.ClientMessageHandler.OutMessageSink
+import data.DataProviders
 
 import scala.concurrent.ExecutionContext
 
@@ -28,6 +29,11 @@ case class ClientMessageHandler(outMessageSink: OutMessageSink)(implicit executi
 
   def handleInMessage(inMessage: MessageFromClient): Unit = {
     inMessage match {
+      case GetDataRequest(dataSources, requester, geneName) =>
+        dataSources.foreach({ dataSource =>
+          val data = DataProviders.getData(geneName, dataSource)
+          outMessageSink.send(GetDataResponse(dataSource, requester, data))
+        })
       case _ =>
         outMessageSink.send(ErrorToClient(s"Don't know what to do with incoming socket message '$inMessage'."))
     }

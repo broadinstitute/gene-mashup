@@ -9,7 +9,7 @@ import play.api.libs.functional.syntax._
   */
 object SocketJsonReader extends Reads[MessageFromClient]{
   override def reads(json: JsValue): JsResult[MessageFromClient] = {
-    ((json \ "geneName").validate[String] and (json \"requester").validate[String]
-    and (json \"dataSources").validate[Seq[String]])(GetDataMessage)
+    ((json \"dataSources").validate[Seq[String]] and (json \"requester").validate[String]
+    and (json \ "geneName").validate[String])(GetDataRequest)
   }
 }
