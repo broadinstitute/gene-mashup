@@ -1,6 +1,6 @@
 var dataSources = {
-	gene: ['ncbi'],
-	human: ['clinvar'],
+	gene: ['ncbi', 'ensembl', 'uniprot'],
+	human: ['clinvar', 'gwas'],
 	modelOrganisms: []
 };
 
@@ -10,12 +10,11 @@ var defaultDataSources = {
 	modelOrganisms: []
 };
 
-socket = new WebSocket('ws://localhost:9000/ws');
+socket = new WebSocket('ws://echo.websocket.org');
 socket.onopen = function() {
 	console.log('open');
 	// load the default data
-	socket.send(JSON.stringify({dataSources: ['test', 'testity-test', 'test-test'], requester: 'some one special',
-	geneName: 'abcd42'}));
+	socket.send({msg: 'test', cat: 'meow'});
 };
 socket.onmessage = function(e) {
  	console.log('message', e);
@@ -64,22 +63,23 @@ function reloadSection(sectionName) {
 	// clear the section
 	$('#' + sectionName + 'Info').empty();
 
-	// // ------ testing
-	// var returned = {
- // 		data: {
-	//  		dataSourceName: 'ncbi',
-	//  		requester: 'gene',
-	//  		data: 'a lot of stuff'
- // 		}
- // 	};
- // 	processIncomingData(returned);
- // 	// ------ testing
+	// ------ testing
+	var returned = {
+ 		data: {
+	 		dataSourceName: 'ncbi',
+	 		requester: sectionName,
+	 		data: 'a lot of stuff'
+ 		}
+ 	};
+ 	processIncomingData(returned);
+ 	// ------ testing
 
 	
 }
 
 function selectGene() {
 	_.forEach(dataSources, function(sources, sectionName) {
+		console.log('????')
 		reloadSection(sectionName);
 	});
 }
