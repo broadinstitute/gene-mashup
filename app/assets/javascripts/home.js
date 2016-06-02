@@ -14,7 +14,8 @@ socket = new WebSocket('ws://localhost:9000/ws');
 socket.onopen = function() {
 	console.log('open');
 	// load the default data
-	socket.send({msg: 'test', cat: 'meow'});
+	socket.send(JSON.stringify({dataSources: ['test', 'testity-test', 'test-test'], requester: 'some one special',
+	geneName: 'abcd42'}));
 };
 socket.onmessage = function(e) {
  	console.log('message', e);

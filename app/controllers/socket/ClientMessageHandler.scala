@@ -28,6 +28,8 @@ object ClientMessageHandler {
 case class ClientMessageHandler(outMessageSink: OutMessageSink)(implicit executionContext: ExecutionContext) {
 
   def handleInMessage(inMessage: MessageFromClient): Unit = {
+    println("IN:")
+    println(inMessage)
     inMessage match {
       case GetDataRequest(dataSources, requester, geneName) =>
         dataSources.foreach({ dataSource =>

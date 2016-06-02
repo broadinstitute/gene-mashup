@@ -28,6 +28,8 @@ class WebSocketReceiveActor(sendActor: ActorRef) extends Actor with ClientMessag
   }
 
   override def send(outMessage: MessageToClient): Unit = {
+    println("OUT")
+    println(outMessage)
     sendActor ! SocketJsonWriter.writes(outMessage)
   }
 }

@@ -19,7 +19,8 @@ class GeneMashupController @Inject()(implicit system: ActorSystem, materializer:
     Ok(views.html.Application.index())
   }
 
-  def socket: WebSocket = WebSocket.accept[JsValue, JsValue] { request =>
+  def socket: WebSocket = WebSocket.accept[JsValue, JsValue] { implicit request =>
+    println(controllers.routes.GeneMashupController.socket().webSocketURL())
     ActorFlow.actorRef(sendActor => WebSocketReceiveActor.props(sendActor))
   }
 
