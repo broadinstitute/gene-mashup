@@ -1,2 +1,3 @@
-GET     /     controllers.GeneMashupController.index
-GET     /ws   controllers.GeneMashupController.socket
+GET     /                    controllers.GeneMashupController.index
+GET     /ws                  controllers.GeneMashupController.socket
+GET     /assets/*file        controllers.Assets.at(path="/public", file)
