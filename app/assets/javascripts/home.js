@@ -10,7 +10,7 @@ var defaultDataSources = {
 	modelOrganisms: []
 };
 
-socket = new WebSocket('ws://echo.websocket.org');
+socket = new WebSocket('ws://localhost:9000/ws');
 socket.onopen = function() {
 	console.log('open');
 	// load the default data
@@ -63,16 +63,16 @@ function reloadSection(sectionName) {
 	// clear the section
 	$('#' + sectionName + 'Info').empty();
 
-	// ------ testing
-	var returned = {
- 		data: {
-	 		dataSourceName: 'ncbi',
-	 		requester: 'gene',
-	 		data: 'a lot of stuff'
- 		}
- 	};
- 	processIncomingData(returned);
- 	// ------ testing
+	// // ------ testing
+	// var returned = {
+ // 		data: {
+	//  		dataSourceName: 'ncbi',
+	//  		requester: 'gene',
+	//  		data: 'a lot of stuff'
+ // 		}
+ // 	};
+ // 	processIncomingData(returned);
+ // 	// ------ testing
 
 	
 }
