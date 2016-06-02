@@ -14,7 +14,7 @@ socket = new WebSocket('ws://echo.websocket.org');
 socket.onopen = function() {
 	console.log('open');
 	// load the default data
-	socket.send({msg: 'test', cat: 'meow'});
+	socket.send(JSON.stringify({msg: 'test', cat: 'meow'}));
 };
 socket.onmessage = function(e) {
  	console.log('message', e);
@@ -79,7 +79,7 @@ function reloadSection(sectionName) {
 
 function selectGene() {
 	_.forEach(dataSources, function(sources, sectionName) {
-		console.log('????')
+		console.log('????');
 		reloadSection(sectionName);
 	});
 }
