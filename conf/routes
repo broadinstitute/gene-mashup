@@ -1,1 +1,2 @@
 GET     /     controllers.GeneMashupController.index
+GET     /ws   controllers.GeneMashupController.socket
